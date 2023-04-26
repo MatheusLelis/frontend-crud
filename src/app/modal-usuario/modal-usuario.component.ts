@@ -31,7 +31,6 @@ export class ModalUsuarioComponent implements OnInit {
 
     const usuario: Usuario = dados.usuario;
     this.titulo = dados.titulo
-    console.log("usuario = ", usuario);
 
     if(usuario.id) this.isCreate = false
 
@@ -45,7 +44,8 @@ export class ModalUsuarioComponent implements OnInit {
       cpf: [usuario.cpf, Validators.required],
       dataNascimento: [usuario.dataNascimento, Validators.required],
       nomeMae: [usuario.nomeMae, Validators.required],
-      idStatus: [usuario.idStatus, Validators.required]
+      idStatus: [usuario.idStatus, Validators.required],
+      dataInclusao: [usuario.dataInclusao]
     })
 
     // if(this.isCreate){
@@ -55,7 +55,6 @@ export class ModalUsuarioComponent implements OnInit {
   }
 
   salvarFormulario(){
-    console.log(this.usuarioForm)
     return this.usuarioForm.value
   }
 
