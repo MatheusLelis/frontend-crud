@@ -1,0 +1,117 @@
+<h2>Listagem de Usuários</h2>
+
+<section class="container">
+
+  <div class="acoes">
+
+    <div (click)="criarUsuario()">
+      <span class="material-icons">
+        add
+      </span>
+    </div>
+
+    <div (click)="abrirFiltro()">
+      <span class="material-icons">
+        filter_alt
+      </span>
+    </div>
+
+    <div (click)="limparFiltro()">
+      <span class="material-icons">
+        clear
+      </span>
+    </div>
+
+    <div (click)="abrirModalConfirmacao('Tem certeza que deseja excluir todos os usuários?', 1, 0)">
+      <span class="material-icons">
+        delete_forever
+      </span>
+    </div>
+
+
+  </div>
+  <form [formGroup]="formulario">
+
+    <mat-table mat-table [dataSource]="dataSource" formArrayName="usuarios">
+
+      <ng-container matColumnDef="nome">
+        <th mat-header-cell *matHeaderCellDef>
+          Nome
+        </th>
+        <td mat-cell *matCellDef="let element; let index=index" [formGroupName]="index">
+          {{element.nome}}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="cpf">
+        <th mat-header-cell *matHeaderCellDef>
+          CPF
+        </th>
+        <td mat-cell *matCellDef="let element; let index=index" [formGroupName]="index">
+          {{element.cpf}}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="dataNascimento">
+        <th mat-header-cell *matHeaderCellDef>
+          Data Nascimento
+        </th>
+        <td mat-cell *matCellDef="let element; let index=index" [formGroupName]="index">
+          {{element.dataNascimento | date: 'dd/MM/yyyy' }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="login">
+        <th mat-header-cell *matHeaderCellDef>
+          Login
+        </th>
+        <td mat-cell *matCellDef="let element; let index=index" [formGroupName]="index">
+          {{element.login}}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef> Status </th>
+        <td mat-cell *matCellDef="let element; let index=index" [formGroupName]="index">
+          <select formControlName="status" (change)="onStatusChange(element.nome, index, $event)">
+            <option *ngFor="let status of todosStatus" [value]="status.id">{{status.descricao}}</option>
+          </select>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="editar-excluir">
+        <th mat-header-cell *matHeaderCellDef>
+
+        </th>
+        <td mat-cell *matCellDef="let element; let index=index" [formGroupName]="index">
+
+          <div style="display: flex; width: 60px; align-items: center; justify-content: center; margin: auto;">
+
+            <div class="btn-acoes" style="margin: 0px 10px;" (click)="editarUsuario(index)">
+              <span class="material-icons"> edit </span>
+            </div>
+
+            <div class="btn-acoes"
+              (click)="abrirModalConfirmacao('Tem certeza que deseja excluir o usuário ' + element.nome + '?', 2, index)">
+              <span class="material-icons">
+                delete
+              </span>
+            </div>
+
+          </div>
+
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"> </tr>
+    </mat-table>
+    <mat-paginator [length]="this.usuario.length" [pageSize]="10"></mat-paginator>
+
+  </form>
+
+  <div>
+
+  </div>
+
+</section>

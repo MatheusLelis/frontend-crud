@@ -1,0 +1,31 @@
+<div class="container">
+
+  <div class="box">
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+
+      <div class="box-login">
+        <label for="login">Login</label>
+        <input type="text" formControlName="login">
+      </div>
+
+      <div class="box-senha">
+        <label for="senha">Senha</label>
+        <input type="password" formControlName="senha">
+      </div>
+
+      <!-- <div class="box-recuperar">
+        <a class="rec-senha-btn" (click)="recuperarSenha()">Recuperar Senha</a>
+      </div> -->
+
+      <div class="login">
+        <input [disabled]="false" type="submit" class="btn btn-primary mt-4" value="Login">
+      </div>
+
+
+    </form>
+
+  </div>
+
+
+</div>

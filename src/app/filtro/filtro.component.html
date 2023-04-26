@@ -1,0 +1,70 @@
+<section>
+
+  <h3>Filtrar Usuários</h3>
+
+  <form [formGroup]="filtroForm">
+
+    <div>
+      <label for="nome">Nome</label>
+      <input type="text" formControlName="nome">
+    </div>
+
+    <div>
+      <label for="cpf">CPF</label>
+      <input type="text" formControlName="cpf">
+    </div>
+
+    <div>
+      <label for="login">Login</label>
+      <input type="text" formControlName="login">
+    </div>
+
+    <div>
+      <label for="status">Status</label>
+      <select formControlName="idStatus">
+        <option [value]='0'>Nenhum</option>
+        <option *ngFor="let status of todosStatus" [value]="status.id">{{status.descricao}}</option>
+      </select>
+    </div>
+
+    <div>
+      <label>Período Nascimento</label>
+      <input type="date" formControlName="periodoNascimentoInicial">
+      <input type="date" formControlName="periodoNascimentoFinal">
+    </div>
+
+    <div>
+      <label>Período Inserção</label>
+      <input type="date" formControlName="periodoInsercaoInicial">
+      <input type="date" formControlName="periodoInsercaoFinal">
+    </div>
+
+    <div>
+      <label>Período Alteração</label>
+      <input type="date" formControlName="periodoAlteracaoInicial">
+      <input type="date" formControlName="periodoAlteracaoFinal">
+    </div>
+
+    <div>
+      <label>Faixa Etária</label>
+      <select formControlName="idFaixaEtaria">
+        <option [value]="0">Nenhuma</option>
+        <option *ngFor="let faixaEtaria of todasFaixasEtarias" [value]="faixaEtaria.id">{{faixaEtaria.descricao}}</option>
+      </select>
+    </div>
+
+  </form>
+
+</section>
+
+<div class="btn">
+
+  <button mat-raised-button class="btn-close" [mat-dialog-close]="false" color="warn">
+    Cancelar
+  </button>
+
+  <button mat-raised-button class="btn-close" [mat-dialog-close]="this.filtroForm.value" color="primary">
+    Filtrar
+  </button>
+
+</div>

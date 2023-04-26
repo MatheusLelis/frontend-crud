@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  url: 'https://crud-backend-matheuslelis.vercel.app'
 };

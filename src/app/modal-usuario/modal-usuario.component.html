@@ -1,0 +1,69 @@
+<section>
+
+  <h3>{{titulo}}</h3>
+
+  <form (ngSubmit)="salvarFormulario()" [formGroup]="usuarioForm">
+
+    <div>
+      <label for="nome">Nome</label>
+      <input type="text" formControlName="nome">
+    </div>
+
+    <div>
+      <label for="login">Login</label>
+      <input type="text" formControlName="login">
+    </div>
+
+    <div>
+      <label for="email">Email</label>
+      <input type="email" formControlName="email">
+    </div>
+
+    <div>
+      <label for="telefone">Telefone</label>
+      <input type="text" formControlName="telefone">
+    </div>
+
+    <div>
+      <label for="cpf">CPF</label>
+      <input type="text" formControlName="cpf">
+    </div>
+
+    <div *ngIf="isCreate">
+      <label for="senha">Senha</label>
+      <input type="text" formControlName="senha">
+    </div>
+
+    <div>
+      <label for="dataNascimento">Data Nascimento</label>
+      <input type="date" formControlName="dataNascimento">
+    </div>
+
+    <div>
+      <label for="nomeMae">Nome Mãe</label>
+      <input type="text" formControlName="nomeMae">
+    </div>
+
+    <div>
+      <label>Status</label>
+      <select formControlName="idStatus">
+        <option *ngFor="let status of todosStatus" [value]="status.id">{{status.descricao}}</option>
+      </select>
+    </div>
+
+
+  </form>
+
+</section>
+
+<div class="btn">
+
+  <button mat-raised-button class="btn-close" [mat-dialog-close]="false" color="warn">
+    Cancelar
+  </button>
+
+  <button mat-raised-button type="submit" class="btn-close" [mat-dialog-close]="salvarFormulario()" [disabled]="!usuarioForm.valid" color="primary">
+    Salvar
+  </button>
+
+</div>

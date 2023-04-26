@@ -1,0 +1,47 @@
+.container, h2{
+  padding: 10px 20px;
+}
+
+h2{
+  background-color: #ebebeb
+}
+
+
+.acoes{
+  margin-bottom: 10px;
+  display: flex;
+}
+
+.acoes > div{
+  margin: 0px 10px;
+}
+
+.acoes > button{
+  margin-right: 10px;
+}
+
+mat-table{
+  width: fit-content;
+  max-width: 900px;
+}
+
+th, td {
+  text-align: center !important;
+  vertical-align: middle;
+  width: 20%;
+  margin: 100px;
+  padding: 100px;
+}
+
+.btn-acoes:hover{
+  cursor: pointer;
+}
+
+.acoes > div:hover{
+  cursor: pointer;
+}
+
+mat-paginator{
+  width: fit-content;
+}
+

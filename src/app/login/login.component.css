@@ -1,0 +1,54 @@
+*{
+  font-size: 1rem;
+}
+
+.container{
+  width: 100%;
+  height: 100%;
+  background-color: #ebebeb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.box{
+  background-color: white;
+  padding: 30px;
+  border-radius: 10px;
+}
+
+.box-login, .box-senha{
+  margin: 15px 0px;
+}
+
+div > label{
+  display: block;
+}
+
+div > input{
+  border-radius: 5px;
+}
+
+.rec-senha-btn{
+  font-size: 0.75rem;
+}
+
+.box-recuperar{
+  margin: auto;
+  width: fit-content;
+}
+
+.login{
+  margin: 8px auto 0px auto;
+  width: fit-content;
+  border-radius: 5px;
+}
+
+.login > input:hover{
+  cursor: pointer;
+}
+
+.login > *{
+  padding: 2px 5px;
+  min-width: 80px;
+}

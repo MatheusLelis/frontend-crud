@@ -1,0 +1,28 @@
+div{
+  margin: 7px 0px;
+}
+
+div > label{
+  display: block;
+}
+
+div > select {
+  width: 100%;
+}
+
+div > input{
+  border-radius: 5px;
+}
+
+h3{
+  font-size: 1.1rem;
+}
+
+.btn{
+  margin-top: 20px;
+  margin-right: auto;
+}
+
+.btn > button {
+  margin-left: 10px;
+}
