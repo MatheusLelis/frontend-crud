@@ -23,7 +23,6 @@ export class FiltroComponent implements OnInit {
     const filtro: Filtro = dados.filtro
     this.todosStatus = dados.todosStatus
     this.todasFaixasEtarias = dados.todasFaixasEtarias
-    console.log("filtro = ", filtro)
 
     this.filtroForm = this.formBuilder.group({
       nome: [filtro.nome],
@@ -44,13 +43,6 @@ export class FiltroComponent implements OnInit {
   }
 
   onSubmit(filtrar: boolean) {
-
-
-
-    console.log(filtrar);
-    console.log(this.filtroForm.value);
-
-    //Fazer a consulta
   }
 
 }

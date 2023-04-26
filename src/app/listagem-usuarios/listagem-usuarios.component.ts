@@ -23,6 +23,7 @@ export class ListagemUsuariosComponent implements OnInit {
 
   formulario!: FormGroup;
   dataSource!: any;
+  loading = false
 
   filtroAplicado: Filtro = this.reiniciarFiltro();
 
@@ -44,12 +45,10 @@ export class ListagemUsuariosComponent implements OnInit {
     this.carregarDados()
 
     this.service.carregarTodasFaixasEtarias().subscribe((todasFaixasEtarias: any) => {
-      console.log("todasFaixasEtarias = ", todasFaixasEtarias);
       this.todasFaixasEtarias = todasFaixasEtarias
     })
 
     this.service.carregarTodosStatus().subscribe((status: any) => {
-      console.log("carregarTodosStatus = ", status);
       this.todosStatus = status
     })
   }
@@ -71,8 +70,9 @@ export class ListagemUsuariosComponent implements OnInit {
   }
 
   carregarDados(){
+    this.loading = true
     this.service.carregarTodosUsuarios().subscribe((usuarios: any) => {
-      console.log("todos Usuarios = ", usuarios);
+      this.loading = false
       this.usuario = usuarios;
       this.instanciarTabela(this.usuario);
     })
@@ -88,10 +88,10 @@ export class ListagemUsuariosComponent implements OnInit {
   }
 
   limparFiltro(){
-    console.log("naõ estava igual")
     this.filtroAplicado = this.reiniciarFiltro()
+    this.loading = true
     this.service.filtrarUsuarios(this.reiniciarFiltro()).subscribe((usuariosFiltrados: any) => {
-      console.log('usuariosFiltrados = ', usuariosFiltrados)
+      this.loading = false
       this.instanciarTabela(usuariosFiltrados)
     })
   }
@@ -129,11 +129,11 @@ export class ListagemUsuariosComponent implements OnInit {
 
     const dialog = this.dialog.open(FiltroComponent, dialogConfig);
     dialog.afterClosed().subscribe((filtro: Filtro ) => {
-      console.log('filtro = ', filtro)
       if(!filtro) return
       this.filtroAplicado = filtro
+      this.loading = true
       this.service.filtrarUsuarios(filtro).subscribe((usuariosFiltrados: any) => {
-        console.log('usuariosFiltrados = ', usuariosFiltrados)
+        this.loading = false
         this.instanciarTabela(usuariosFiltrados)
       })
     })
@@ -141,7 +141,6 @@ export class ListagemUsuariosComponent implements OnInit {
   }
 
   editarUsuario(index: number){
-    console.log("criarUsuario = ", this.usuario[index])
     const dialogConfig = new MatDialogConfig();
     dialogConfig.data = {
       usuario: this.usuario[index],
@@ -151,12 +150,11 @@ export class ListagemUsuariosComponent implements OnInit {
 
     const dialog = this.dialog.open(ModalUsuarioComponent, dialogConfig);
     dialog.afterClosed().subscribe((usuario: Usuario) => {
-      console.log('edicaoooo = ', usuario)
 
       if(!usuario) return
-
+      this.loading = true
       this.service.atualizarUsuario(usuario).subscribe(usuarioAtualizado => {
-        console.log('usuarioAtualizado = ', usuarioAtualizado)
+        this.loading = false
         this.openSnackBar('Usuário editado com sucesso.')
         this.carregarDados()
       })
@@ -164,7 +162,6 @@ export class ListagemUsuariosComponent implements OnInit {
   }
 
   criarUsuario(){
-    console.log("criarUsuario = ")
     const dialogConfig = new MatDialogConfig();
 
     const usuario: Usuario = {
@@ -188,12 +185,11 @@ export class ListagemUsuariosComponent implements OnInit {
 
     const dialog = this.dialog.open(ModalUsuarioComponent, dialogConfig);
     dialog.afterClosed().subscribe((usuario: Usuario) => {
-      console.log('usuarioCriado = ', usuario)
 
       if(!usuario) return
-
+      this.loading = true
       this.service.criarUsuarioBanco(usuario).subscribe(usuarioAtualizado => {
-        console.log('usuarioAtualizado = ', usuarioAtualizado)
+        this.loading = false
         this.openSnackBar('Usuário criado com sucesso.')
         this.carregarDados()
       })
@@ -202,42 +198,41 @@ export class ListagemUsuariosComponent implements OnInit {
   }
 
   excluirTodos(){
+    this.loading = true
     this.service.removerTodos().subscribe(remover => {
-      console.log('remover = ', remover)
+      this.loading = false
       this.openSnackBar('Todos os usuário foram excluidos com sucesso.')
       this.carregarDados()
     })
   }
 
   excluir(index: number){
-    console.log("excluir = ", index)
+    this.loading = true
     this.service.removerUsuario(this.usuario[index]).subscribe(remover => {
-      console.log('remover = ', remover)
+      this.loading = false
       this.openSnackBar('Usuário excluido com sucesso.')
       this.carregarDados()
     })
   }
 
   editarStatus(index: number, idStatus: number){
-    console.log('editarStatus')
     const idUsuario: any = this.usuario[index].id
     if(!idUsuario) return
+    this.loading = true
     this.service.updateStatus(idUsuario, idStatus).subscribe(value => {
+      this.loading = false
       this.openSnackBar('Usuário excluido com sucesso.')
       this.carregarDados()
     })
   }
 
   onStatusChange(nomeUsuario: string, index: number, event: any){
-    console.log('nomeUsuario', nomeUsuario, index, event)
     const idStatus = +event.target.value
     const msg = 'Tem certeza que deseja modificar o status?'
     this.abrirModalConfirmacao(msg, 3, index, idStatus)
   }
 
   abrirModalConfirmacao(msgConfirmacao: string, acao: number, index: number, idStatus: number = 0){
-
-    console.log('msgConfirmacao = ', msgConfirmacao)
 
     const dialogConfig = new MatDialogConfig();
 

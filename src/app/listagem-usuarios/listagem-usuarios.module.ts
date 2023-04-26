@@ -14,6 +14,7 @@ import { FiltroComponent } from '../filtro/filtro.component';
 import { MatButtonModule } from '@angular/material/button';
 import { ModalUsuarioComponent } from '../modal-usuario/modal-usuario.component';
 import { ModalConfirmacaoComponent } from '../modal-confirmacao/modal-confirmacao.component';
+import { NgxLoadingModule } from 'ngx-loading';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { ModalConfirmacaoComponent } from '../modal-confirmacao/modal-confirmaca
     ReactiveFormsModule,
     FormsModule,
     MatTableModule,
+    NgxLoadingModule.forRoot({}),
     MatButtonModule,
     MatSelectModule,
     MatCardModule,

@@ -13,6 +13,7 @@ import { environment } from 'src/environments/environment';
 export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
+  loading = false
 
   constructor(
     private formBuilder: FormBuilder,
@@ -40,8 +41,9 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     console.log(this.loginForm.value);
-
+    this.loading = true
     this.login(this.loginForm.value.login, this.loginForm.value.senha).subscribe((retornoLogin: any) => {
+      this.loading = false
       console.log("retornoLogin = ", retornoLogin)
       if(retornoLogin.erro){
         this.openSnackBar(retornoLogin.msg)

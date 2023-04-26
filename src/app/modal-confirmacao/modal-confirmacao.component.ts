@@ -15,7 +15,6 @@ export class ModalConfirmacaoComponent implements OnInit {
     public dialogRef: MatDialogRef<ModalConfirmacaoComponent>,
   ) {
 
-    console.log("DADOS = ", dados)
     this.msg = dados.mensagem
 
   }
